@@ -8,8 +8,10 @@ private_subnet_az2_cidr = "172.16.144.0/20"
 secure_subnet_az1_cidr  = "172.16.160.0/20"
 secure_subnet_az2_cidr  = "172.16.176.0/20"
 user_data               = "userdata.sh"
+user_data1              = "userdata1.sh"
 email                   = "durvesh.yadav3604@gmail.com"
 instance_type           = "m7i-flex.large"
+
 
 
 
