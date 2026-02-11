@@ -61,44 +61,26 @@ pipeline {
             }
         }
 
-        stage('Terraform Apply / Destroy') {
-            steps {
-                input message: "Confirm Terraform ${params.ACTION}?"
-
-                withCredentials([[ 
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-terraform-creds'
-                ]]) {
-                    dir("${TF_DIR}") {
-                        script {
-                            if (params.ACTION == 'apply') {
-                                parallel(
-                                    "Networking": {
-                                        sh 'terraform apply -auto-approve -parallelism=20 -target=module.vpc -target=module.natgateway -target=module.security_group'
-                                    },
-                                    "Compute": {
-                                        sh 'terraform apply -auto-approve -parallelism=20 -target=module.ec2 -target=module.asg -target=module.bastion'
-                                    },
-                                    "Database": {
-                                        sh 'terraform apply -auto-approve -parallelism=20 -target=module.rds'
-                                    },
-                                    "Kubernetes": {
-                                        sh 'terraform apply -auto-approve -parallelism=20 -target=module.eks -target=module.eks_node_group'
-                                    },
-                                    "LB & Monitoring": {
-                                        sh 'terraform apply -auto-approve -parallelism=20 -target=module.alb -target=module.monitoring'
-                                    }
-                                ) // <-- closes parallel
-                            } else {
-                                sh 'terraform destroy -auto-approve -parallelism=20'
-                            }
-                        } // <-- closes script
+       stage('Terraform Apply / Destroy') {
+       steps {
+        withCredentials([[ 
+            $class: 'AmazonWebServicesCredentialsBinding',
+            credentialsId: 'aws-terraform-creds'
+            ]]) {
+            dir("${TF_DIR}") {
+                script {
+                    if (params.ACTION == 'apply') {
+                        sh 'terraform apply -auto-approve'
+                    } else {
+                        sh 'terraform destroy -auto-approve'
                     }
                 }
             }
         }
     }
+}
 
+            
     post {
         success {
             echo " Terraform ${params.ACTION} completed successfully"
