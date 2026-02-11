@@ -79,16 +79,15 @@ pipeline {
                } // close withCredentials
            } // close steps
        } // close stage
+    } // close stages
 
-            
     post {
         success {
-            echo " Terraform ${params.ACTION} completed successfully"
+            echo "✅ Terraform ${params.ACTION} completed successfully"
         }
         failure {
-            echo " Terraform ${params.ACTION} failed"
+            echo "❌ Terraform ${params.ACTION} failed"
         }
     }
-} // <-- closes pipeline
-
+}
 
