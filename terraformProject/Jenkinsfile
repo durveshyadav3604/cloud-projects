@@ -20,7 +20,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/durveshyadav3604/cloud-devops-project.git',
+                    url: 'https://github.com/durveshyadav3604/cloud-projects.git',
                     credentialsId: 'github-token'
             }
         }
