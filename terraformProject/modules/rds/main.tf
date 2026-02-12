@@ -7,7 +7,7 @@ resource "random_password" "db_password" {
 
 # create secret
 resource "aws_secretsmanager_secret" "db_secret" {
-  name = "rds-mysql-credentials18"
+  name = "rds-mysql-credentials19"
 }
 
 # store username & password
