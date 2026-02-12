@@ -48,6 +48,8 @@ resource "aws_instance" "bastion" {
   user_data = base64encode(var.user_data1)
 
   vpc_security_group_ids = [aws_security_group.bastion_sg.id]
+  iam_instance_profile = aws_iam_instance_profile.bastion_profile.name
+
 
   tags = {
     Name = "${var.project_name}-public-ec2"
