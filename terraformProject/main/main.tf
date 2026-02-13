@@ -107,7 +107,6 @@ module "bastion" {
   source               = "../modules/bastion"
   project_name         = "myproject"
   instance_type        = var.instance_type
-  user_data1           = var.user_data1
   public_subnet_az1_id = module.vpc.public_subnet_az1_id
   vpc_id               = module.vpc.vpc_id
 }
