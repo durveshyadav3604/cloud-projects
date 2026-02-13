@@ -70,24 +70,24 @@ apt install fontconfig openjdk-21-jre
 # Install Jenkins (Correct Way)
 # =====================================
 
-# Add new Jenkins key
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | \
+# Add Jenkins GPG Key
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key | \
 tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 
-# Add repository
+# Add Jenkins Repository
 echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 https://pkg.jenkins.io/debian-stable binary/" | \
 tee /etc/apt/sources.list.d/jenkins.list > /dev/null
 
-# Update & Install
+# Update & Install Jenkins
 apt update -y
 apt install -y jenkins
 
+# Enable & Start Jenkins
 systemctl enable jenkins
 systemctl start jenkins
 
-
-# Add Jenkins to docker group
+# Add Jenkins to Docker Group
 usermod -aG docker jenkins
 systemctl restart jenkins
 
