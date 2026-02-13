@@ -61,7 +61,7 @@ unzip -q awscliv2.zip
 # =====================================
 # Install Java 17
 # =====================================
-apt install -y openjdk-17-jdk
+apt install fontconfig openjdk-21-jre
 
 # =====================================
 # Install Jenkins
