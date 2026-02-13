@@ -45,7 +45,7 @@ resource "aws_instance" "bastion" {
   subnet_id                   = var.public_subnet_az1_id
   key_name                    = "linux-key"
   associate_public_ip_address = true
-  user_data = base64encode(var.user_data1)
+  user_data = file("${path.root}/userdata1.sh")
 
   vpc_security_group_ids = [aws_security_group.bastion_sg.id]
   iam_instance_profile = aws_iam_instance_profile.bastion_profile.name
