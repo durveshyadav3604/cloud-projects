@@ -65,7 +65,7 @@ pipeline {
            steps {
                withCredentials([[ 
                    $class: 'AmazonWebServicesCredentialsBinding',
-                   credentialsId: 'terraform-aws-creds'
+                   credentialsId: 'aws-terraform-creds'
                ]]) {
                    dir("${TF_DIR}") {
                        script {
