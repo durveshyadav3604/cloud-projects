@@ -39,26 +39,6 @@ resource "aws_vpc_endpoint" "endpoints" {
   # Add a security group to the VPC endpoint
   security_group_ids = [aws_security_group.vpc_endpoint_security_group.id]
 }
-resource "aws_vpc_endpoint" "ecr_api" {
-  vpc_id            = var.vpc_id
-  service_name      = "com.amazonaws.${var.region}.ecr.api"
-  vpc_endpoint_type = "Interface"
-  security_group_ids = [aws_security_group.vpc_endpoint_security_group.id]
-  subnet_ids        = var.private_subnets
-}
-resource "aws_vpc_endpoint" "ecr_dkr" {
-  vpc_id            = var.vpc_id
-  service_name      = "com.amazonaws.${var.region}.ecr.dkr"
-  vpc_endpoint_type = "Interface"
-  security_group_ids = [aws_security_group.vpc_endpoint_security_group.id]
-  subnet_ids        = var.private_subnets
-}
-resource "aws_vpc_endpoint" "s3" {
-  vpc_id       = var.vpc_id
-  service_name = "com.amazonaws.${var.region}.s3"
-  vpc_endpoint_type = "Gateway"
-  route_table_ids   = var.private_route_tables
-}
 
 
 # Create IAM role for EC2 instance
