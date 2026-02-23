@@ -37,3 +37,7 @@ resource "aws_iam_instance_profile" "bastion_profile" {
   name = "${var.project_name}-bastion-profile"
   role = aws_iam_role.bastion_role.name
 }
+resource "aws_iam_role_policy_attachment" "bastion_ssm" {
+  role       = aws_iam_role.bastion_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
