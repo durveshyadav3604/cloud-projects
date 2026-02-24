@@ -71,7 +71,7 @@ resource "aws_iam_policy" "secrets_access_policy" {
         Action = [
           "secretsmanager:GetSecretValue"
         ]
-        Resource = "arn:aws:secretsmanager:ap-south-1:082634139648:secret:rds-mysql-credentials30*"
+        Resource = "arn:aws:secretsmanager:ap-south-1:082634139648:secret:rds-mysql-credentials31*"
       },
       {
         Effect = "Allow"
