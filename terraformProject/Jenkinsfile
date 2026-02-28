@@ -33,10 +33,10 @@ pipeline {
                 ]]) {
                     dir("${TF_DIR}") {
                         sh '''
-                          echo "🔐 Verifying AWS identity..."
+                          echo " Verifying AWS identity..."
                           aws sts get-caller-identity
 
-                          echo "🚀 Initializing Terraform..."
+                          echo " Initializing Terraform..."
                           rm -rf .terraform
                           terraform init -reconfigure
                         '''
@@ -83,10 +83,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Terraform ${params.ACTION} completed successfully"
+            echo " Terraform ${params.ACTION} completed successfully"
         }
         failure {
-            echo "❌ Terraform ${params.ACTION} failed"
+            echo " Terraform ${params.ACTION} failed"
         }
     }
 }
