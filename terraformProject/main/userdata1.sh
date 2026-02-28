@@ -59,7 +59,7 @@ unzip -q awscliv2.zip
 ./aws/install
 
 # =====================================
-# Install Java 17
+# Install Java 21
 # =====================================
 apt install fontconfig openjdk-21-jre
 
@@ -70,18 +70,15 @@ apt install fontconfig openjdk-21-jre
 # Install Jenkins (Correct Way)
 # =====================================
 
-# Add Jenkins GPG Key
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key | \
-tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-
-# Add Jenkins Repository
-echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-https://pkg.jenkins.io/debian-stable binary/" | \
-tee /etc/apt/sources.list.d/jenkins.list > /dev/null
-
-# Update & Install Jenkins
-apt update -y
-apt install -y jenkins
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian/jenkins.io-2026.key
+  
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+  
+sudo apt update
+sudo apt install jenkins -y 
 
 # Enable & Start Jenkins
 systemctl enable jenkins
