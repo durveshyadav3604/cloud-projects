@@ -18,7 +18,7 @@ resource "aws_launch_template" "ec2_asg" {
   name                  = "my-launch-template"
   image_id              = data.aws_ami.ubuntu.id
   key_name              = "linux-key"
-  instance_type         = "t3.small"
+  instance_type         = "c7i-flex.large"
   iam_instance_profile {
     name = var.iam_ec2_instance_profile.name
   }
