@@ -77,22 +77,32 @@ resource "aws_cloudwatch_dashboard" "cost_dashboard" {
 
   dashboard_body = jsonencode({
     widgets = [
+
       {
-        type       = "metric"
-        x          = 0
-        y          = 0
-        width      = 24
-        height     = 6
+        type   = "metric"
+        x      = 0
+        y      = 0
+        width  = 24
+        height = 6
+
         properties = {
           metrics = [
-            ["AWS/Billing", "EstimatedCharges", "Currency", "USD"]
+
+            ["AWS/Billing","EstimatedCharges","ServiceName","AmazonEC2","Currency","USD"],
+            ["AWS/Billing","EstimatedCharges","ServiceName","AmazonRDS","Currency","USD"],
+            ["AWS/Billing","EstimatedCharges","ServiceName","AmazonElasticLoadBalancing","Currency","USD"]
+
           ]
-          period = 86400
-          stat   = "Maximum"
+
+          view   = "timeSeries"
+          stacked = false
           region = "us-east-1"
-          title  = "Estimated Charges"
+          stat   = "Maximum"
+          period = 86400
+          title  = "Daily AWS Service Cost (EC2 | RDS | ALB)"
         }
       }
+
     ]
   })
 }
