@@ -15,20 +15,23 @@ data "aws_ami" "ubuntu2" {
 
 resource "aws_security_group" "bastion_sg" {
   name        = "bastion-sg"
-  description = "Allow SSH access to bastion"
+  description = "Allow restricted SSH access"
   vpc_id      = var.vpc_id
 
   ingress {
+    description = "SSH from admin IP"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["YOUR_PUBLIC_IP/32"]
   }
+
   ingress {
+    description = "Jenkins UI access"
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["YOUR_PUBLIC_IP/32"]
   }
 
   egress {
@@ -36,6 +39,10 @@ resource "aws_security_group" "bastion_sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "bastion-sg"
   }
 }
 resource "aws_instance" "bastion" {
