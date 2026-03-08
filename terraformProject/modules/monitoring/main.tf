@@ -162,7 +162,7 @@ resource "aws_cloudwatch_dashboard" "dashboard" {
         height = 6
         properties = {
           metrics = [
-            [ "AWS/EC2", "CPUUtilization", "AutoScalingGroupName", var.asg_name ]
+            [ "AWS/EC2", "CPUUtilization", "AutoScalingGroupName", "InstanceId" ]
           ]
           period = 300
           stat = "Average"
@@ -211,7 +211,7 @@ resource "aws_cloudwatch_dashboard" "dashboard" {
             height = 6,
             properties = {
             metrics = [
-                [ "AWS/AutoScaling", "GroupInServiceInstances", "AutoScalingGroupName", var.asg_name ],
+                [ "AWS/AutoScaling", "GroupInServiceInstances", "AutoScalingGroupName", "InstanceId" ],
                 [ ".", "GroupDesiredCapacity", ".", "." ]
               ],
             period = 300,
@@ -228,7 +228,7 @@ resource "aws_cloudwatch_dashboard" "dashboard" {
             height = 6,
             properties = {
             metrics = [
-                ["CWAgent","mem_used_percent","AutoScalingGroupName",var.asg_name]
+                ["CWAgent","mem_used_percent","AutoScalingGroupName","InstanceId"]
               ],
             stat = "Average",
             period = 300,
@@ -244,7 +244,7 @@ resource "aws_cloudwatch_dashboard" "dashboard" {
             height = 6,
             properties = {
             metrics = [
-                ["CWAgent","disk_used_percent","AutoScalingGroupName",var.asg_name]
+                ["CWAgent","disk_used_percent","AutoScalingGroupName","InstanceId"]
             ],
             stat = "Average",
             period = 300,
