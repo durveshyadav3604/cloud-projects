@@ -12,9 +12,6 @@ data "aws_ami" "ubuntu2" {
     values = ["hvm"]
   }
 }
-data "http" "myip" {
-  url = "https://ipv4.icanhazip.com"
-}
 
 resource "aws_security_group" "bastion_sg" {
   name        = "bastion-sg"
@@ -26,7 +23,7 @@ resource "aws_security_group" "bastion_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
@@ -34,7 +31,7 @@ resource "aws_security_group" "bastion_sg" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
